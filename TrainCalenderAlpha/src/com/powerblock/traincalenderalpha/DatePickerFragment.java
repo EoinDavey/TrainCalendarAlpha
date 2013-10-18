@@ -37,7 +37,6 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 	@Override
 	public void onDateSet(DatePicker view, int year, int monthOfYear,
 			int dayOfMonth) {
-		//mParent.calculateTrainTime(year, monthOfYear, dayOfMonth);
 		mParent.calculateTrainTime(year, monthOfYear, dayOfMonth);
 	}
 
