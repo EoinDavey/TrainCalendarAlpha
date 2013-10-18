@@ -1,7 +1,6 @@
 package com.powerblock.traincalenderalpha;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import android.content.ContentValues;
 import android.os.Bundle;
@@ -12,6 +11,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements DatePickerFragment.parentCommunicateInterface {
 	
@@ -30,6 +30,14 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 		setContentView(R.layout.activity_main);
 		setCurrentDate();
 		addListenerToButton();
+	}
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+		if(!(bChangeDate instanceof View.OnClickListener)){
+			addListenerToButton();
+		}
 	}
 
 	@Override
@@ -77,6 +85,10 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 	
 	public void calculateTrainTime(int givenYear, int givenMonth, int givenDay){
 		ContentValues values = dbHandler.getDate(givenYear);
+		if(values.getAsInteger(DatabaseHandler.KEY_YEAR) == -1){
+			Toast.makeText(this, String.valueOf(givenYear) + " is not a supported year", Toast.LENGTH_LONG).show();
+			return;
+		}
 		int startMonth = values.getAsInteger(DatabaseHandler.KEY_MONTH);
 		int startDay = values.getAsInteger(DatabaseHandler.KEY_DAY);
 		int startYear = values.getAsInteger(DatabaseHandler.KEY_YEAR);
@@ -85,7 +97,7 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 		startCal.set(Calendar.YEAR, startYear);
 		startCal.set(Calendar.MONTH, startMonth - 1);
 		startCal.set(Calendar.DAY_OF_MONTH, startDay);
-		int startWeekOfYear = startCal.get(Calendar.WEEK_OF_YEAR) - 1;
+		int startWeekOfYear = startCal.get(Calendar.WEEK_OF_YEAR);
 		Log.v(toString(),String.valueOf(startWeekOfYear));
 		
 		Calendar cal = Calendar.getInstance();
@@ -97,6 +109,7 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 		trainDayOfWeek += 1;
 		if(trainDayOfWeek > 7){
 			trainDayOfWeek -= 7;
+			trainWeekOfYear +=1;
 		}
 		
 		int weekOfYear = trainWeekOfYear - startWeekOfYear;

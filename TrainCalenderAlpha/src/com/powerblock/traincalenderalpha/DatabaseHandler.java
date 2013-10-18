@@ -1,7 +1,5 @@
 package com.powerblock.traincalenderalpha;
 
-import java.util.Calendar;
-
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,7 +12,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	private FragmentActivity context;
 	
 	private final static String DATABASE_NAME = "trainTimesDatabase.db";
-	private final static int DATABASE_VERSION = 1;
+	private final static int DATABASE_VERSION = 4;
 	private final static String TABLE_YEAR_STARTS = "tableOfYearStarts";
 	
 	public final static String KEY_YEAR = "year";
@@ -31,12 +29,21 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		String createTable = "CREATE TABLE " + TABLE_YEAR_STARTS + "("
 				+ KEY_YEAR + " INTEGER PRIMARY KEY," + KEY_MONTH + " INTEGER," + KEY_DAY + " INTEGER)";
 		db.execSQL(createTable);
-		ContentValues values = new ContentValues();
-		values.put(KEY_YEAR, 2013);
-		values.put(KEY_MONTH, 1);
-		values.put(KEY_DAY, 1);
-		db.insert(TABLE_YEAR_STARTS, null, values);
-		
+		ContentValues values2013 = new ContentValues();
+		values2013.put(KEY_YEAR, 2013);
+		values2013.put(KEY_MONTH, 3);
+		values2013.put(KEY_DAY, 30);
+		db.insert(TABLE_YEAR_STARTS, null, values2013);
+		ContentValues values2012 = new ContentValues();
+		values2012.put(KEY_YEAR, 2012);
+		values2012.put(KEY_MONTH, 3);
+		values2012.put(KEY_DAY, 31);
+		db.insert(TABLE_YEAR_STARTS, null, values2012);
+		ContentValues values2014 = new ContentValues();
+		values2014.put(KEY_YEAR, 2014);
+		values2014.put(KEY_MONTH, 3);
+		values2014.put(KEY_DAY, 29);
+		db.insert(TABLE_YEAR_STARTS, null, values2014);
 	}
 
 	@Override
@@ -48,7 +55,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	
 	public ContentValues getDate(int year){
 		SQLiteDatabase db = getReadableDatabase(); 
-		String selectQuery = "SELECT  * FROM "+ TABLE_YEAR_STARTS +" WHERE " + KEY_YEAR + " =?";
 		
 		Cursor cursor = db.query(TABLE_YEAR_STARTS, new String[]{KEY_YEAR, KEY_MONTH, KEY_DAY}, KEY_YEAR+"=?", new String[]{String.valueOf(year)}, null, null, null);
 		
