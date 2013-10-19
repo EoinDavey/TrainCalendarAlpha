@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.widget.DatePicker;
+import android.widget.TextView;
 
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 	
@@ -38,6 +39,8 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 	public void onDateSet(DatePicker view, int year, int monthOfYear,
 			int dayOfMonth) {
 		mParent.calculateTrainTime(year, monthOfYear, dayOfMonth);
+		TextView textView = (TextView) getActivity().findViewById(R.id.textView1);
+		textView.setText(new StringBuilder().append(dayOfMonth).append("-").append(monthOfYear + 1).append("-").append(year).toString());
 	}
 
 }
