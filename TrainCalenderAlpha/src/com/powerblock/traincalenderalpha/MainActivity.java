@@ -4,6 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import android.app.AlertDialog;
 import android.content.ContentValues;
@@ -148,7 +149,7 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 		int startDay = values.getAsInteger(DatabaseHandler.KEY_DAY);
 		int startYear = values.getAsInteger(DatabaseHandler.KEY_YEAR);
 		
-		Calendar startCal = Calendar.getInstance();
+		Calendar startCal = Calendar.getInstance(Locale.US);
 		startCal.clear();
 		startCal.set(Calendar.YEAR, startYear);
 		startCal.set(Calendar.MONTH, startMonth - 1);
@@ -156,7 +157,7 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 		int startWeekOfYear = startCal.get(Calendar.WEEK_OF_YEAR);
 		Log.v(toString(),String.valueOf(startWeekOfYear));
 		
-		Calendar cal = Calendar.getInstance();
+		Calendar cal = Calendar.getInstance(Locale.US);
 		cal.clear();
 		cal.set(Calendar.YEAR, givenYear);
 		cal.set(Calendar.MONTH, givenMonth);
@@ -215,7 +216,7 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 		int startYear = values.getAsInteger(DatabaseHandler.KEY_YEAR);
 		Log.v("calculateRealTime", new StringBuilder().append("Month: ").append(startMonth).append(" Day: ").append(startDay).toString());
 		
-		Calendar startCal = Calendar.getInstance();
+		Calendar startCal = Calendar.getInstance(Locale.US);
 		startCal.clear();
 		startCal.set(Calendar.MONTH, startMonth - 1);
 		startCal.set(Calendar.DAY_OF_MONTH, startDay);
@@ -256,7 +257,7 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 		}
 
 	
-		Calendar cal = Calendar.getInstance();
+		Calendar cal = Calendar.getInstance(Locale.US);
 		cal.clear();
 		cal.set(Calendar.WEEK_OF_YEAR, givenWeek + startWeekOfYear);
 		cal.set(Calendar.DAY_OF_WEEK, givenDay);
@@ -265,7 +266,7 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 		
 		
 		//Test
-		Calendar testCal = Calendar.getInstance();
+		Calendar testCal = Calendar.getInstance(Locale.US);
 		testCal.clear();
 		testCal.set(Calendar.YEAR, 2013);
 		testCal.set(Calendar.WEEK_OF_YEAR, 25 + 1);
