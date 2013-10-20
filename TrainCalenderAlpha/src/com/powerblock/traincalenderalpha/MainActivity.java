@@ -163,9 +163,34 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 		cal.set(Calendar.DAY_OF_MONTH, givenDay);
 		int trainWeekOfYear = cal.get(Calendar.WEEK_OF_YEAR);
 		int trainDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-		trainDayOfWeek += 1;
-		if(trainDayOfWeek > 7){
-			trainDayOfWeek -= 7;
+		
+		switch(trainDayOfWeek){
+		case 1:
+			//Sunday
+			trainDayOfWeek = 2;
+			break;
+		case 2:
+			//Monday
+			trainDayOfWeek = 3;
+			break;
+		case 3:
+			//Tueday
+			trainDayOfWeek = 4;
+			break;
+		case 4:
+			//Wednesday
+			trainDayOfWeek = 5;
+			break;
+		case 5:
+			//Thursday
+			trainDayOfWeek = 6;
+			break;
+		case 6:
+			//Friday
+			trainDayOfWeek = 7;
+			break;
+		case 7:
+			trainDayOfWeek = 1;
 			trainWeekOfYear +=1;
 		}
 		
@@ -200,35 +225,42 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 		
 		switch(givenDay){
 		case 1:
+			//Saturday
 			givenDay = 7;
 			givenWeek -= 1;
 			break;
 		case 2:
+			//Sunday
 			givenDay = 1;
 			break;
 		case 3:
+			//Monday
 			givenDay = 2;
 			break;
 		case 4:
+			//Tuesday
 			givenDay = 3;
 			break;
 		case 5:
+			//Wednesday
 			givenDay = 4;
 			break;
 		case 6:
+			//Thursday
 			givenDay = 5;
+			break;
 		case 7:
+			//Friday
 			givenDay = 6;
 			break;
 		}
 
-		
+	
 		Calendar cal = Calendar.getInstance();
 		cal.clear();
 		cal.set(Calendar.WEEK_OF_YEAR, givenWeek + startWeekOfYear);
 		cal.set(Calendar.DAY_OF_WEEK, givenDay);
 		cal.set(Calendar.YEAR, givenYear);
-		//int givenWeekOfYear = cal.get(Calendar.WEEK_OF_YEAR);
 		Date result = cal.getTime();
 		
 		
