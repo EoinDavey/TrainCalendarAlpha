@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -20,6 +21,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+@SuppressLint("SimpleDateFormat")
 public class MainActivity extends FragmentActivity implements DatePickerFragment.parentCommunicateInterface {
 	
 	private Button bChangeDate;
@@ -29,10 +31,6 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 	private EditText yearEditText;
 	private EditText dayEditText;
 	private EditText weekEditText;
-	
-	private int year;
-	private int month;
-	private int day;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -87,9 +85,9 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 		dateShow = (TextView) findViewById(R.id.textView1);
 		final Calendar c = Calendar.getInstance();
 		
-		year = c.get(Calendar.YEAR);
-		month = c.get(Calendar.MONTH);
-		day = c.get(Calendar.DAY_OF_MONTH);
+		int year = c.get(Calendar.YEAR);
+		int month = c.get(Calendar.MONTH);
+		int day = c.get(Calendar.DAY_OF_MONTH);
 		
 		dateShow.setText(new StringBuilder()
 						.append(day).append("-").append(month + 1).append("-").append(year).append(" "));
@@ -138,7 +136,6 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 		
 	}
 	
-	
 	public void calculateTrainTime(int givenYear, int givenMonth, int givenDay){
 		ContentValues values = dbHandler.getDate(givenYear);
 		if(values.getAsInteger(DatabaseHandler.KEY_YEAR) == -1){
@@ -162,8 +159,9 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 		cal.set(Calendar.YEAR, givenYear);
 		cal.set(Calendar.MONTH, givenMonth);
 		cal.set(Calendar.DAY_OF_MONTH, givenDay);
+		
 		int trainWeekOfYear = cal.get(Calendar.WEEK_OF_YEAR);
-		int trainDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+		int trainDayOfWeek = cal.get(Calendar.DAY_OF_WEEK);  
 		
 		switch(trainDayOfWeek){
 		case 1:
@@ -197,6 +195,11 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 		
 		int weekOfYear = trainWeekOfYear - startWeekOfYear;
 		
+		if(cal.compareTo(startCal) == -1){
+			weekOfYear += 52;
+		}
+		
+		calculatePeriodAndDay(weekOfYear);
 		StringBuilder builder = new StringBuilder();
 		builder.append("Week: ").append(weekOfYear).append(" Day: ").append(trainDayOfWeek);
 		String trainTime = builder.toString();
@@ -206,6 +209,7 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 	}
 
 	public void calculateRealTime(int givenYear, int givenWeek, int givenDay){
+
 		ContentValues values = dbHandler.getDate(givenYear);
 		if(values.getAsInteger(DatabaseHandler.KEY_DAY) == -1){
 			Toast.makeText(this, "This Year is not supported", Toast.LENGTH_LONG).show();
@@ -255,29 +259,21 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 			givenDay = 6;
 			break;
 		}
+		
+		int realWeekOfYear = givenWeek + startWeekOfYear;
+		if(realWeekOfYear > 52){
+			realWeekOfYear -= 52;
+			givenYear += 1;
+		}
 
 	
 		Calendar cal = Calendar.getInstance(Locale.US);
 		cal.clear();
-		cal.set(Calendar.WEEK_OF_YEAR, givenWeek + startWeekOfYear);
+		cal.set(Calendar.WEEK_OF_YEAR, realWeekOfYear);
 		cal.set(Calendar.DAY_OF_WEEK, givenDay);
 		cal.set(Calendar.YEAR, givenYear);
 		Date result = cal.getTime();
-		
-		
-		//Test
-		Calendar testCal = Calendar.getInstance(Locale.US);
-		testCal.clear();
-		testCal.set(Calendar.YEAR, 2013);
-		testCal.set(Calendar.WEEK_OF_YEAR, 25 + 1);
-		testCal.set(Calendar.DAY_OF_WEEK, 1 + 1);
-		Date testDate = testCal.getTime();
-		DateFormat testDf = new SimpleDateFormat("dd-MM-yyyy");
-		String testString = testDf.format(testDate);
-		Log.v("Test",testString);
-
-		
-		
+	
 		DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
 		String dateString = df.format(result);
 		Log.v("dateString",dateString);
@@ -285,5 +281,33 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 		TextView dateShow = (TextView) findViewById(R.id.textView1);
 		dateShow.setText(dateString);
 	}
-
+	
+	public void calculatePeriodAndDay(int weekNo){
+		
+		int result;
+		
+		//gets the period number
+		int periodNum = 1;
+		int weekNoForPeriod = weekNo - 1;
+		int base = 4;
+		while(true){
+			if(weekNoForPeriod < base){
+				break;
+			} else {
+				periodNum += 1;
+				base += 4;		
+			}
+		}
+		
+		//gets the day number in the period
+		int periodForCalc = periodNum - 1;
+		int baseMod = periodForCalc * 4;
+		if(baseMod == 0){
+			result = weekNo;
+		} else {
+			result = weekNo % baseMod;
+		}
+		Log.v("PeriodAndDay Result", String.valueOf(periodNum) + "/" + String.valueOf(result));
+	}
+	
 }
