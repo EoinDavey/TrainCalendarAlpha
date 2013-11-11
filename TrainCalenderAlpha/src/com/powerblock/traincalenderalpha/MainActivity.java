@@ -12,7 +12,8 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -22,7 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("SimpleDateFormat")
-public class MainActivity extends FragmentActivity implements DatePickerFragment.parentCommunicateInterface {
+public class MainActivity extends ActionBarActivity implements DatePickerFragment.parentCommunicateInterface {
 	
 	private Button bChangeDate;
 	private TextView dateShow;
@@ -35,6 +36,10 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		final ActionBar actionBar = getSupportActionBar();
+		actionBar.setDisplayShowTitleEnabled(false);
+		actionBar.setDisplayShowCustomEnabled(true);
+		actionBar.setCustomView(getLayoutInflater().inflate(R.layout.actionbar_image_view, null));
 		dbHandler = new DatabaseHandler(this);
 		setContentView(R.layout.activity_main);
 		setCurrentDate();
@@ -53,7 +58,7 @@ public class MainActivity extends FragmentActivity implements DatePickerFragment
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+		return false;
 	}
 	
 	public String TrainDatePick(View v){
