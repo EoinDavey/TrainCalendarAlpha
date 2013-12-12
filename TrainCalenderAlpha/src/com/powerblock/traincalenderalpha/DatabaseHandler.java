@@ -9,8 +9,6 @@ import android.util.Log;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 	
-	private FragmentActivity context;
-	
 	private final static String DATABASE_NAME = "trainTimesDatabase.db";
 	private final static int DATABASE_VERSION = 4;
 	private final static String TABLE_YEAR_STARTS = "tableOfYearStarts";
@@ -21,7 +19,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	
 	public DatabaseHandler(FragmentActivity context){
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
-		this.context = context;
 	}
 
 	@Override
@@ -44,6 +41,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values2014.put(KEY_MONTH, 3);
 		values2014.put(KEY_DAY, 29);
 		db.insert(TABLE_YEAR_STARTS, null, values2014);
+		ContentValues values2015 = new ContentValues();
+		values2015.put(KEY_YEAR, 2015);
+		values2015.put(KEY_MONTH, 3);
+		values2015.put(KEY_DAY, 28);
+		db.insert(TABLE_YEAR_STARTS, null, values2015);
 	}
 
 	@Override

@@ -38,7 +38,9 @@ public class MainActivity extends ActionBarActivity implements DatePickerFragmen
 		super.onCreate(savedInstanceState);
 		final ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayShowTitleEnabled(false);
+		actionBar.setDisplayHomeAsUpEnabled(false);
 		actionBar.setDisplayShowCustomEnabled(true);
+		actionBar.setHomeButtonEnabled(false);
 		actionBar.setCustomView(getLayoutInflater().inflate(R.layout.actionbar_image_view, null));
 		dbHandler = new DatabaseHandler(this);
 		setContentView(R.layout.activity_main);
@@ -95,7 +97,7 @@ public class MainActivity extends ActionBarActivity implements DatePickerFragmen
 		int day = c.get(Calendar.DAY_OF_MONTH);
 		
 		dateShow.setText(new StringBuilder()
-						.append(day).append("-").append(month + 1).append("-").append(year).append(" "));
+						.append(day).append("-").append(month + 1).append("-").append(year).toString());
 		calculateTrainTime(year, month, day);
 	}
 	
@@ -119,6 +121,10 @@ public class MainActivity extends ActionBarActivity implements DatePickerFragmen
 				int weekNo = Integer.parseInt(weekEditText.getText().toString());
 				int dayNo = Integer.parseInt(dayEditText.getText().toString());
 				int year = Integer.parseInt(yearEditText.getText().toString());
+				if(weekNo > 52 || dayNo > 7){
+					Toast.makeText(getApplicationContext(), "Unsupported date", Toast.LENGTH_SHORT).show();
+					return;
+				}
 				calculateRealTime(year, weekNo, dayNo);
 				TextView weekText = (TextView) findViewById(R.id.textView2);
 				weekText.setText(new StringBuilder().append("Week: " ).append(weekNo).append(" Day: ").append(dayNo).toString());
@@ -131,13 +137,6 @@ public class MainActivity extends ActionBarActivity implements DatePickerFragmen
 				dialog.dismiss();
 			}
 		}).show();
-		
-	}
-	
-	public void getWeekAndDate(){
-		/*EditText weekEditText = (EditText) findViewById(R.id.editText1);
-		EditText dayEditText = (EditText) findViewById(R.id.editTextDays);
-		EditText yearEditText = (EditText) findViewById(R.id.yearEditText);*/
 		
 	}
 	
@@ -214,6 +213,10 @@ public class MainActivity extends ActionBarActivity implements DatePickerFragmen
 	}
 
 	public void calculateRealTime(int givenYear, int givenWeek, int givenDay){
+		
+		if(givenWeek > 52 || givenDay > 7){
+			return;
+		}
 
 		ContentValues values = dbHandler.getDate(givenYear);
 		if(values.getAsInteger(DatabaseHandler.KEY_DAY) == -1){
@@ -312,6 +315,7 @@ public class MainActivity extends ActionBarActivity implements DatePickerFragmen
 		} else {
 			result = weekNo % baseMod;
 		}
+		Toast.makeText(this, new StringBuilder().append(periodNum).append("/").append(result).toString(), Toast.LENGTH_SHORT).show();
 		Log.v("PeriodAndDay Result", String.valueOf(periodNum) + "/" + String.valueOf(result));
 	}
 	
