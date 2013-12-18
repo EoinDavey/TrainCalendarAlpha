@@ -41,6 +41,7 @@ public class MainActivity extends ActionBarActivity implements DatePickerFragmen
 		actionBar.setDisplayHomeAsUpEnabled(false);
 		actionBar.setDisplayShowCustomEnabled(true);
 		actionBar.setHomeButtonEnabled(false);
+		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setCustomView(getLayoutInflater().inflate(R.layout.actionbar_image_view, null));
 		dbHandler = new DatabaseHandler(this);
 		setContentView(R.layout.activity_main);
@@ -203,7 +204,7 @@ public class MainActivity extends ActionBarActivity implements DatePickerFragmen
 			weekOfYear += 52;
 		}
 		
-		calculatePeriodAndDay(weekOfYear);
+		calculatePeriodAndWeek(weekOfYear);
 		StringBuilder builder = new StringBuilder();
 		builder.append("Week: ").append(weekOfYear).append(" Day: ").append(trainDayOfWeek);
 		String trainTime = builder.toString();
@@ -290,7 +291,7 @@ public class MainActivity extends ActionBarActivity implements DatePickerFragmen
 		dateShow.setText(dateString);
 	}
 	
-	public void calculatePeriodAndDay(int weekNo){
+	public void calculatePeriodAndWeek(int weekNo){
 		
 		int result;
 		
@@ -317,6 +318,6 @@ public class MainActivity extends ActionBarActivity implements DatePickerFragmen
 		}
 		Toast.makeText(this, new StringBuilder().append(periodNum).append("/").append(result).toString(), Toast.LENGTH_SHORT).show();
 		Log.v("PeriodAndDay Result", String.valueOf(periodNum) + "/" + String.valueOf(result));
-	}
+		}
 	
 }
