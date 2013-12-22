@@ -4,13 +4,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
     
-    <ImageView
-        android:contentDescription="@drawable/trainbackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@drawable/train_background_layer"
-        android:scaleType="center"/>
-    
     <LinearLayout
         android:id="@+id/layout1"
         android:layout_width="match_parent"
