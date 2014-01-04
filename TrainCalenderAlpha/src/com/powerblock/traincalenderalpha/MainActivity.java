@@ -59,9 +59,10 @@ public class MainActivity extends ActionBarActivity implements DatePickerFragmen
 		setContentView(R.layout.activity_main);
 		setCurrentDate();
 		addListenerToButton();
+
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		
 		mTitles = getResources().getStringArray(R.array.navArray);
-		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 		mDrawerList = (ListView) findViewById(R.id.left_drawer);
 		mTitle = mDrawerTitle = getTitle();
 		
@@ -73,12 +74,12 @@ public class MainActivity extends ActionBarActivity implements DatePickerFragmen
 			
 			public void onDrawerClosed(View view){
 				getSupportActionBar().setTitle(mTitle);
-				invalidateOptionsMenu();
+				supportInvalidateOptionsMenu();
 			}
 			
 			public void onDrawerOpened(View drawerView){
 				getSupportActionBar().setTitle(mTitle);
-				invalidateOptionsMenu();
+				supportInvalidateOptionsMenu();
 			}
 			
 		};
@@ -112,7 +113,6 @@ public class MainActivity extends ActionBarActivity implements DatePickerFragmen
 	
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerLayout);
 		return super.onPrepareOptionsMenu(menu);
 	}
 	
