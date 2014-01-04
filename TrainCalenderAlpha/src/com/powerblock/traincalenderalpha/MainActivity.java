@@ -10,15 +10,22 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,21 +39,81 @@ public class MainActivity extends ActionBarActivity implements DatePickerFragmen
 	private EditText yearEditText;
 	private EditText dayEditText;
 	private EditText weekEditText;
+	
+	private String[] mTitles;
+	private DrawerLayout mDrawerLayout;
+	private ActionBarDrawerToggle mDrawerToggle;
+	private ListView mDrawerList;
+	private CharSequence mTitle;
+	private CharSequence mDrawerTitle;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		final ActionBar actionBar = getSupportActionBar();
-		actionBar.setDisplayShowTitleEnabled(false);
-		actionBar.setDisplayHomeAsUpEnabled(false);
 		actionBar.setDisplayShowCustomEnabled(true);
-		actionBar.setHomeButtonEnabled(false);
-		actionBar.setDisplayShowHomeEnabled(false);
+		//actionBar.setHomeButtonEnabled(false);
+		//actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setCustomView(getLayoutInflater().inflate(R.layout.actionbar_image_view, null));
 		dbHandler = new DatabaseHandler(this);
 		setContentView(R.layout.activity_main);
 		setCurrentDate();
 		addListenerToButton();
+		
+		mTitles = getResources().getStringArray(R.array.navArray);
+		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		mDrawerList = (ListView) findViewById(R.id.left_drawer);
+		mTitle = mDrawerTitle = getTitle();
+		
+		mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, mTitles));
+		
+		mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+		
+		mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.drawable.ic_navigation_drawer, R.string.drawer_open, R.string.drawer_close){
+			
+			public void onDrawerClosed(View view){
+				getSupportActionBar().setTitle(mTitle);
+				invalidateOptionsMenu();
+			}
+			
+			public void onDrawerOpened(View drawerView){
+				getSupportActionBar().setTitle(mTitle);
+				invalidateOptionsMenu();
+			}
+			
+		};
+		
+		mDrawerLayout.setDrawerListener(mDrawerToggle);
+		
+		actionBar.setDisplayHomeAsUpEnabled(true);
+		actionBar.setHomeButtonEnabled(true);
+	}
+	
+	@Override
+	protected void onPostCreate(Bundle savedInstanceState){
+		super.onPostCreate(savedInstanceState);
+		mDrawerToggle.syncState();
+	}
+	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig){
+		super.onConfigurationChanged(newConfig);
+		mDrawerToggle.onConfigurationChanged(newConfig);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item){
+		if(mDrawerToggle.onOptionsItemSelected(item)){
+			return true;
+		}
+		
+		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerLayout);
+		return super.onPrepareOptionsMenu(menu);
 	}
 	
 	@Override
@@ -98,7 +165,7 @@ public class MainActivity extends ActionBarActivity implements DatePickerFragmen
 		int day = c.get(Calendar.DAY_OF_MONTH);
 		
 		dateShow.setText(new StringBuilder()
-						.append(day).append("-").append(month + 1).append("-").append(year).toString());
+						.append(day).append("/").append(month + 1).append("/").append(year).toString());
 		calculateTrainTime(year, month, day);
 	}
 	
@@ -319,5 +386,16 @@ public class MainActivity extends ActionBarActivity implements DatePickerFragmen
 		Toast.makeText(this, new StringBuilder().append(periodNum).append("/").append(result).toString(), Toast.LENGTH_SHORT).show();
 		Log.v("PeriodAndDay Result", String.valueOf(periodNum) + "/" + String.valueOf(result));
 		}
+	
+	private class DrawerItemClickListener implements ListView.OnItemClickListener {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
 	
 }
