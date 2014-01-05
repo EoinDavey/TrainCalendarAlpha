@@ -1,4 +1,4 @@
-package com.powerblock.traincalenderalpha;
+package com.powerblock.traincalendaralpha;
 
 import android.content.ContentValues;
 import android.database.Cursor;

@@ -1,20 +1,34 @@
-package com.powerblock.traincalenderalpha;
+package com.powerblock.traincalendaralpha;
 
 import java.util.Calendar;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import com.powerblock.traincalenderalpha.R;
+
+@SuppressLint("ValidFragment")
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 	
 	parentCommunicateInterface mParent;
+	private Fragment mParentFrag;
 	
 	public interface parentCommunicateInterface{
 		void calculateTrainTime(int year, int month, int day);
+	}
+	
+	public DatePickerFragment(){
+		throw new ClassCastException("parent must implement parentCommunicateInterface");
+	}
+
+	public DatePickerFragment(Fragment parent){
+		mParentFrag = parent;
 	}
 	
 	
@@ -27,7 +41,7 @@ public class DatePickerFragment extends DialogFragment implements DatePickerDial
 		int day = c.get(Calendar.DAY_OF_MONTH);
 		
 		try{
-			mParent = (parentCommunicateInterface) getActivity();
+			mParent = (parentCommunicateInterface) mParentFrag;
 		} catch (ClassCastException e){
 			throw new ClassCastException(getActivity().toString() + " must implement parentCommunicateInterface");
 		}

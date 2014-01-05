@@ -5,61 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     
-	<RelativeLayout
+	<FrameLayout
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
-	    tools:context=".MainActivity" >
-	    
-	    <RelativeLayout
-	        android:id="@+id/layout1"
-	        android:layout_width="150dip"
-	        android:layout_height="wrap_content"
-	        android:layout_centerHorizontal="true">
+	    tools:context=".MainActivity"
+	    android:id="@+id/fragment_parent" >
 	
-		    <Button
-		        android:id="@+id/button1"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="Input" />
-		
-		    <TextView
-		        android:id="@+id/textView1"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_alignParentRight="true"
-		        android:layout_centerVertical="true"
-		        android:layout_toRightOf="@id/button1"
-		        android:text="TextView" />
-	    
-	    </RelativeLayout>
+	</FrameLayout >
 	
-	    <RelativeLayout
-	        android:layout_width="150dip"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@+id/layout1"
-	        android:layout_centerHorizontal="true"
-	        android:layout_marginTop="22dp"
-	        android:orientation="horizontal" >
-	
-	        <Button
-	            android:id="@+id/button2"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:text="Input" />
-	        
-			
-		    <TextView
-	           android:id="@+id/textView2"
-	           android:layout_width="wrap_content"
-	           android:layout_height="wrap_content"
-	           android:layout_alignParentRight="true"
-	           android:layout_centerVertical="true"
-	           android:layout_toRightOf="@id/button2"
-	           android:text="TextView" />
-			    
-	    </RelativeLayout>
-	
-	</RelativeLayout>
+	<!--fragment
+	    android:id="@+id/test_fragment"
+	    android:name="com.powerblock.traincalendaralpha.CalculatorFragment"
+	    android:layout_width="0dip"
+	    android:layout_height="match_parent"
+	    tools:layout="@layout/calculator_layout" / -->
 	
 	<ListView
 	    android:id="@+id/left_drawer"
@@ -67,9 +26,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:choiceMode="singleChoice"
-        android:divider="@android:color/transparent"
-        android:dividerHeight="0dp"
-        android:background="#111"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp"
+        android:background="#FFF"
         />
 	
 </android.support.v4.widget.DrawerLayout>

@@ -1,10 +1,12 @@
-package com.powerblock.traincalenderalpha;
+package com.powerblock.traincalendaralpha;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+
+import com.powerblock.traincalenderalpha.R;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -30,7 +32,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("SimpleDateFormat")
-public class MainActivity extends ActionBarActivity implements DatePickerFragment.parentCommunicateInterface {
+public class CopyOfMainActivity extends ActionBarActivity implements DatePickerFragment.parentCommunicateInterface {
 	
 	private Button bChangeDate;
 	private TextView dateShow;

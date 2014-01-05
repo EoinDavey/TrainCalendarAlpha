@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.Whitetheme" >
         <activity
-            android:name="com.powerblock.traincalenderalpha.MainActivity"
+            android:name="com.powerblock.traincalendaralpha.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
