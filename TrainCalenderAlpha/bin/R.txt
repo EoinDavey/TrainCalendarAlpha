@@ -281,7 +281,7 @@ int id action_context_bar 0x7f06001d
 int id action_menu_divider 0x7f060016
 int id action_menu_presenter 0x7f060017
 int id action_mode_close_button 0x7f060024
-int id action_settings 0x7f060049
+int id action_settings 0x7f06004a
 int id activity_chooser_view_content 0x7f060025
 int id always 0x7f06000b
 int id arrows_image 0x7f060042
@@ -295,8 +295,8 @@ int id dialog 0x7f06000e
 int id disableHome 0x7f060008
 int id drawer_layout 0x7f06003c
 int id dropdown 0x7f06000f
-int id editText1 0x7f060045
-int id editTextDays 0x7f060046
+int id editText1 0x7f060046
+int id editTextDays 0x7f060047
 int id edit_query 0x7f060030
 int id end 0x7f060013
 int id expand_activities_button 0x7f060026
@@ -337,13 +337,14 @@ int id submit_area 0x7f060039
 int id tabMode 0x7f060002
 int id textView1 0x7f060041
 int id textView2 0x7f060044
+int id textView3 0x7f060045
 int id title 0x7f06002b
 int id top_action_bar 0x7f060020
 int id up 0x7f060021
 int id useLogo 0x7f060003
-int id web_view 0x7f060048
+int id web_view 0x7f060049
 int id withText 0x7f06000c
-int id yearEditText 0x7f060047
+int id yearEditText 0x7f060048
 int integer abc_max_action_buttons 0x7f0a0000
 int layout abc_action_bar_decor 0x7f030000
 int layout abc_action_bar_decor_include 0x7f030001
@@ -377,7 +378,7 @@ int layout numberpickerdialog 0x7f03001c
 int layout pdf_webview_layout 0x7f03001d
 int layout support_simple_spinner_dropdown_item 0x7f03001e
 int menu main 0x7f0e0000
-int raw calendarpdf 0x7f050000
+int raw calendar 0x7f050000
 int string abc_action_bar_home_description 0x7f0b0001
 int string abc_action_bar_up_description 0x7f0b0002
 int string abc_action_menu_overflow_description 0x7f0b0003

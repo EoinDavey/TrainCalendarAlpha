@@ -34,6 +34,7 @@ public class CalculatorFragment extends Fragment implements DatePickerFragment.p
 	private Button bTrainDate;
 	private TextView mDateShow;
 	private TextView mTrainDateShow;
+	private TextView mPeriodShow;
 	private DatabaseHandler mDbHandler;
 	private EditText mYearEditText;
 	private EditText mDayEditText;
@@ -52,6 +53,7 @@ public class CalculatorFragment extends Fragment implements DatePickerFragment.p
 		bTrainDate = (Button) layout.findViewById(R.id.button2);
 		mDateShow = (TextView) layout.findViewById(R.id.textView1);
 		mTrainDateShow = (TextView) layout.findViewById(R.id.textView2);
+		mPeriodShow = (TextView) layout.findViewById(R.id.textView3);
 		mArrowsView = (ImageView) layout.findViewById(R.id.arrows_image);
 		mDbHandler = new DatabaseHandler(mParent);
 		setCurrentDate();
@@ -315,6 +317,7 @@ public class CalculatorFragment extends Fragment implements DatePickerFragment.p
 		} else {
 			result = weekNo % baseMod;
 		}
+		mPeriodShow.setText("Period: " + String.valueOf(periodNum) + "/" + String.valueOf(result));
 		Toast.makeText(mParent, new StringBuilder().append(periodNum).append("/").append(result).toString(), Toast.LENGTH_SHORT).show();
 		Log.v("PeriodAndDay Result", String.valueOf(periodNum) + "/" + String.valueOf(result));
 		

@@ -10,7 +10,7 @@ import android.util.Log;
 public class DatabaseHandler extends SQLiteOpenHelper {
 	
 	private final static String DATABASE_NAME = "trainTimesDatabase.db";
-	private final static int DATABASE_VERSION = 4;
+	private final static int DATABASE_VERSION = 1;
 	private final static String TABLE_YEAR_STARTS = "tableOfYearStarts";
 	
 	public final static String KEY_YEAR = "year";
