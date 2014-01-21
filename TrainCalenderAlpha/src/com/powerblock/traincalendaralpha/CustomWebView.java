@@ -9,17 +9,25 @@ public class CustomWebView extends WebView {
 	
 	public CustomWebView(Context context) {
 		super(context);
+		activatePreferences();
 	}
 	
 	public CustomWebView(Context context, AttributeSet attrs){
 		super(context, attrs);
+		activatePreferences();
 	}
 	
 	public CustomWebView(Context context, AttributeSet attrs, int defStyle){
 		super(context, attrs, defStyle);
+		activatePreferences();
 	}
 	
-	@Override
+	public void activatePreferences(){
+		getSettings().setBuiltInZoomControls(true);
+		getSettings().setSupportZoom(true);
+	}
+	
+	/*@Override
 	public boolean onTouchEvent(MotionEvent ev){
 		if(ev.getAction() == MotionEvent.ACTION_DOWN ||
 	            ev.getAction() == MotionEvent.ACTION_POINTER_DOWN){
@@ -32,6 +40,6 @@ public class CustomWebView extends WebView {
 			}
 		}
 		return super.onTouchEvent(ev);
-	}
+	}*/
 
 }

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Date → Railway Time"/>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_below="@+id/button1"
+        android:text="Railway Time → Date" />
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/button2"
+        android:id="@+id/linearlayout1">
+        
+        <LinearLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical"
+		    android:layout_marginTop="30dp">
+		    <TextView
+		        android:id="@+id/textView3"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:text="Date"
+		        android:gravity="center_horizontal"
+		        android:textAppearance="?android:attr/textAppearanceLarge"
+		        android:background="#38c0f4"
+			    android:textColor="@android:color/white" />
+		
+		    <TextView
+		        android:id="@+id/textView1"
+		        android:layout_width="match_parent"
+		        android:layout_height="48dp"
+		        android:text="12-5-2014"
+		        android:gravity="center"
+		        android:textAppearance="?android:attr/textAppearanceMedium"
+		        android:background="@drawable/table_border" />
+	    </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+	
+		    <TextView
+		        android:id="@+id/textView4"
+		        android:layout_width="match_parent"
+		        android:gravity="center_horizontal"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="8dp"
+		        android:text="Railway Time"
+		        android:textAppearance="?android:attr/textAppearanceLarge"
+		        android:background="#38c0f4"
+		        android:textColor="@android:color/white" />
+		
+		    <TextView
+		        android:id="@+id/textView2"
+		        android:layout_width="match_parent"
+		        android:layout_height="48dp"
+		        android:background="@drawable/table_border"
+		        android:gravity="center"
+		        android:padding="4dip"
+		        android:text="Week: 12  Day: 5  Period: 11/2"
+		        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	    </LinearLayout>
+	    
+	</LinearLayout>
+
+</RelativeLayout>

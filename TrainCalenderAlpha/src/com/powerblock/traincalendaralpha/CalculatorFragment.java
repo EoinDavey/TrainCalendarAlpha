@@ -21,11 +21,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+//import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.powerblock.traincalenderalpha.R;
+import com.powerblock.traincalendaralpha.R;
 
 public class CalculatorFragment extends Fragment implements DatePickerFragment.parentCommunicateInterface {
 	
@@ -34,12 +34,11 @@ public class CalculatorFragment extends Fragment implements DatePickerFragment.p
 	private Button bTrainDate;
 	private TextView mDateShow;
 	private TextView mTrainDateShow;
-	private TextView mPeriodShow;
+	//private TextView mPeriodShow;
 	private DatabaseHandler mDbHandler;
 	private EditText mYearEditText;
 	private EditText mDayEditText;
 	private EditText mWeekEditText;
-	private ImageView mArrowsView;
 	
 	public CalculatorFragment(){
 		
@@ -48,13 +47,13 @@ public class CalculatorFragment extends Fragment implements DatePickerFragment.p
 	@Override 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		super.onCreateView(inflater, container, savedInstanceState);
-		View layout =  inflater.inflate(R.layout.calculator_layout, container, false);
+		View layout =  inflater.inflate(R.layout.calculator_test_layout, container, false);
 		bChangeDate = (Button) layout.findViewById(R.id.button1);
 		bTrainDate = (Button) layout.findViewById(R.id.button2);
 		mDateShow = (TextView) layout.findViewById(R.id.textView1);
 		mTrainDateShow = (TextView) layout.findViewById(R.id.textView2);
-		mPeriodShow = (TextView) layout.findViewById(R.id.textView3);
-		mArrowsView = (ImageView) layout.findViewById(R.id.arrows_image);
+		//mPeriodShow = (TextView) layout.findViewById(R.id.textView3);
+		//mArrowsView = (ImageView) layout.findViewById(R.id.arrows_image);
 		mDbHandler = new DatabaseHandler(mParent);
 		setCurrentDate();
 		addListenersToButtons();
@@ -81,7 +80,7 @@ public class CalculatorFragment extends Fragment implements DatePickerFragment.p
 		
 		mDateShow.setText(new StringBuilder().append(day).append("-").append(month+1).append("-").append(year).toString());
 		calculateTrainTime(year, month, day);
-		mArrowsView.setImageResource(R.drawable.arrows_off);
+		//mArrowsView.setImageResource(R.drawable.arrows_off);
 		
 	}
 	
@@ -126,7 +125,7 @@ public class CalculatorFragment extends Fragment implements DatePickerFragment.p
 					return;
 				}
 				calculateRealTime(year, weekNo, dayNo);
-				mTrainDateShow.setText(new StringBuilder().append("Week: " ).append(weekNo).append(" Day: ").append(dayNo).toString());
+				mTrainDateShow.setText(new StringBuilder().append("Week: " ).append(weekNo).append("  Day: ").append(dayNo).append("  Period:").append(calculatePeriodAndWeek(weekNo)).toString());
 			}
 			
 		}).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -213,7 +212,7 @@ public class CalculatorFragment extends Fragment implements DatePickerFragment.p
 		String dateString = df.format(result);
 		Log.v("dateString",dateString);
 		
-		mArrowsView.setImageResource(R.drawable.arrows_up);
+		//mArrowsView.setImageResource(R.drawable.arrows_up);
 		
 		mDateShow.setText(dateString);
 	}
@@ -282,18 +281,18 @@ public class CalculatorFragment extends Fragment implements DatePickerFragment.p
 			weekOfYear += 52;
 		}
 		
-		calculatePeriodAndWeek(weekOfYear);
+		String period = calculatePeriodAndWeek(weekOfYear);
 		StringBuilder builder = new StringBuilder();
-		builder.append("Week: ").append(weekOfYear).append(" Day: ").append(trainDayOfWeek);
+		builder.append("Week: ").append(weekOfYear).append("  Day: ").append(trainDayOfWeek).append("  Period: ").append(period);
 		String trainTime = builder.toString();
 		
-		mArrowsView.setImageResource(R.drawable.arrows_down);
+		//mArrowsView.setImageResource(R.drawable.arrows_down);
 		
 		mTrainDateShow.setText(trainTime);
 		
 	}
 	
-	private void calculatePeriodAndWeek(int weekNo){
+	private String calculatePeriodAndWeek(int weekNo){
 		int result;
 		
 		//gets the period number
@@ -317,10 +316,10 @@ public class CalculatorFragment extends Fragment implements DatePickerFragment.p
 		} else {
 			result = weekNo % baseMod;
 		}
-		mPeriodShow.setText("Period: " + String.valueOf(periodNum) + "/" + String.valueOf(result));
+		//mPeriodShow.setText("Period: " + String.valueOf(periodNum) + "/" + String.valueOf(result));
 		Toast.makeText(mParent, new StringBuilder().append(periodNum).append("/").append(result).toString(), Toast.LENGTH_SHORT).show();
 		Log.v("PeriodAndDay Result", String.valueOf(periodNum) + "/" + String.valueOf(result));
-		
+		return String.valueOf(periodNum) + "/" + String.valueOf(result);
 	}
 
 }

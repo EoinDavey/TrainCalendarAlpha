@@ -11,7 +11,7 @@ import android.support.v4.app.Fragment;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
-import com.powerblock.traincalenderalpha.R;
+import com.powerblock.traincalendaralpha.R;
 
 @SuppressLint("ValidFragment")
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {

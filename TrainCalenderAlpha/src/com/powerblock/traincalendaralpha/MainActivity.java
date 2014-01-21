@@ -17,7 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.powerblock.traincalenderalpha.R;
+import com.powerblock.traincalendaralpha.R;
 
 @SuppressLint("SimpleDateFormat")
 public class MainActivity extends ActionBarActivity{

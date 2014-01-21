@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 
-import com.powerblock.traincalenderalpha.R;
+import com.powerblock.traincalendaralpha.R;
 
 public class PdfFragment extends Fragment {
 	
