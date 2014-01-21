@@ -8,13 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
-import android.webkit.WebView;
 
 import com.powerblock.traincalenderalpha.R;
 
 public class PdfFragment extends Fragment {
 	
-	private WebView mWebView;
+	private CustomWebView mWebView;
 	private ActionBarActivity mParent;
 	
 	@Override
@@ -31,10 +30,10 @@ public class PdfFragment extends Fragment {
 	@Override
 	public void onStart(){
 		super.onStart();
-		mWebView = (WebView) mParent.findViewById(R.id.web_view);
-		mWebView.loadUrl("file:///android_res/raw/calendar.html");
+		mWebView = (CustomWebView) mParent.findViewById(R.id.web_view);
 		WebSettings webSettings = mWebView.getSettings();
 		webSettings.setSupportZoom(true);
+		mWebView.loadUrl("file:///android_res/raw/calendar.html");
 	}
 	
 	@Override
