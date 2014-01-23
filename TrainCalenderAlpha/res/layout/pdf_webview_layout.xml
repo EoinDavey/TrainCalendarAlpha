@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.powerblock.traincalendaralpha.CustomWebView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/web_view" >
+    android:orientation="vertical">
     
-
-</com.powerblock.traincalendaralpha.CustomWebView>
+    <TextView android:id="@+id/CalendarTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="Railway Calendar"
+        android:background="@drawable/title_separator"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    
+	<com.powerblock.traincalendaralpha.CustomWebView android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:id="@+id/web_view" />
+</LinearLayout>

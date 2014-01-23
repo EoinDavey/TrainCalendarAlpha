@@ -2,8 +2,8 @@
 <resources>
     
     <string-array name="navArray">
-        <item>Calculator</item>
-        <item>Calendar</item>
+        <item>Date Calculator</item>
+        <item>Railway Calendar</item>
     </string-array>
     
 </resources>
