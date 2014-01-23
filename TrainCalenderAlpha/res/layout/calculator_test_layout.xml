@@ -45,7 +45,7 @@
 			        android:layout_height="48dp"
 			        android:layout_width="0px"
 			        android:layout_weight="1"
-			        android:background="@drawable/separator"
+			        android:background="@drawable/edit_button_selector"
 			        android:src="@android:drawable/ic_menu_edit"
 			        android:layout_margin="2dp" />
 
@@ -101,9 +101,10 @@
 			        android:layout_height="match_parent"
 			        android:layout_width="0px"
 			        android:layout_weight="1"
-			        android:background="@drawable/separator"
-			        android:src="@android:drawable/ic_menu_edit"
+			        android:background="@drawable/edit_button_selector"
+					android:src="@android:drawable/ic_menu_edit"
 			        android:layout_margin="2dp" />
+			        <!--  -->
 			    
 		    </LinearLayout>
 
