@@ -2,31 +2,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="Date → Railway Time"/>
-
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
-        android:layout_below="@+id/button1"
-        android:text="Railway Time → Date" />
     
     <LinearLayout
+        android:id="@+id/linearlayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/button2"
-        android:id="@+id/linearlayout1">
+        android:orientation="vertical" >
         
         <LinearLayout
 		    android:layout_width="match_parent"
@@ -42,21 +24,39 @@
 		        android:textAppearance="?android:attr/textAppearanceLarge"
 		        android:background="#38c0f4"
 			    android:textColor="@android:color/white" />
-		
-		    <TextView
-		        android:id="@+id/textView1"
+		    
+		    <LinearLayout
 		        android:layout_width="match_parent"
-		        android:layout_height="48dp"
-		        android:text="12-5-2014"
+		        android:layout_height="wrap_content"
 		        android:gravity="center"
-		        android:textAppearance="?android:attr/textAppearanceMedium"
-		        android:background="@drawable/table_border" />
+		        android:background="@drawable/table_border"
+		        android:orientation="horizontal" >
+		
+			    <TextView
+			        android:id="@+id/textView1"
+			        android:layout_width="0px"
+			        android:layout_height="48dp"
+			        android:layout_weight="4"
+			        android:text="12-5-2014"
+			        android:gravity="center"
+			        android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <ImageButton android:id="@+id/editButton1"
+			        android:layout_height="48dp"
+			        android:layout_width="0px"
+			        android:layout_weight="1"
+			        android:background="@drawable/separator"
+			        android:src="@android:drawable/ic_menu_edit"
+			        android:layout_margin="2dp" />
+
+		 	</LinearLayout>
 	    </LinearLayout>
         
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:layout_marginTop="30dp" >
 	
 		    <TextView
 		        android:id="@+id/textView4"
@@ -68,16 +68,44 @@
 		        android:textAppearance="?android:attr/textAppearanceLarge"
 		        android:background="#38c0f4"
 		        android:textColor="@android:color/white" />
-		
-		    <TextView
-		        android:id="@+id/textView2"
-		        android:layout_width="match_parent"
-		        android:layout_height="48dp"
-		        android:background="@drawable/table_border"
+		    
+		    <LinearLayout android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
 		        android:gravity="center"
-		        android:padding="4dip"
-		        android:text="Week: 12  Day: 5  Period: 11/2"
-		        android:textAppearance="?android:attr/textAppearanceMedium" />
+		        android:background="@drawable/table_border" >
+			    
+		        <LinearLayout android:layout_width="0px"
+		            android:layout_height="wrap_content"
+		            android:layout_weight="4"
+		            android:gravity="center"
+		            android:orientation="vertical" >
+		
+				    <TextView
+				        android:id="@+id/textView2"
+				        android:layout_width="match_parent"
+				        android:layout_height="48dp"
+				        android:gravity="center"
+				        android:text="Week: 12  Day: 5"
+				        android:textAppearance="?android:attr/textAppearanceMedium" />
+				    <TextView android:id="@+id/periodTextView"
+				        android:layout_width="match_parent"
+				        android:layout_height="48dp"
+				        android:gravity="center"
+				        android:textAppearance="?android:attr/textAppearanceMedium"
+				        android:text="Period: 11/2" 
+				        android:ems="10"/>
+			    
+			    </LinearLayout>
+			    
+			    <ImageButton android:id="@+id/editButton2"
+			        android:layout_height="match_parent"
+			        android:layout_width="0px"
+			        android:layout_weight="1"
+			        android:background="@drawable/separator"
+			        android:src="@android:drawable/ic_menu_edit"
+			        android:layout_margin="2dp" />
+			    
+		    </LinearLayout>
 
 	    </LinearLayout>
 	    

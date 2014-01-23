@@ -16,7 +16,8 @@
         android:id="@+id/editText1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number" />
+        android:inputType="number"
+        android:ems="2" />
     
     <TextView
         android:layout_width="wrap_content"
@@ -27,7 +28,8 @@
         android:id="@+id/editTextDays"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number" />
+        android:inputType="number"
+        android:ems="1" />
     <TextView android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Year Begins: " />
@@ -35,6 +37,7 @@
         android:id="@+id/yearEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number" />
+        android:inputType="number"
+        android:ems="4" />
 
 </LinearLayout>

@@ -33,6 +33,7 @@ public class PdfFragment extends Fragment {
 		mWebView = (CustomWebView) mParent.findViewById(R.id.web_view);
 		WebSettings webSettings = mWebView.getSettings();
 		webSettings.setSupportZoom(true);
+		webSettings.setUseWideViewPort(true);
 		mWebView.loadUrl("file:///android_res/raw/calendar.html");
 	}
 	

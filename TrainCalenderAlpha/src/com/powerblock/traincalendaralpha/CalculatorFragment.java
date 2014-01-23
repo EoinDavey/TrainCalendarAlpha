@@ -21,20 +21,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-//import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.powerblock.traincalendaralpha.R;
 
 public class CalculatorFragment extends Fragment implements DatePickerFragment.parentCommunicateInterface {
 	
 	private ActionBarActivity mParent;
-	private Button bChangeDate;
-	private Button bTrainDate;
+	private ImageButton bChangeDate;
+	private ImageButton bTrainDate;
 	private TextView mDateShow;
 	private TextView mTrainDateShow;
-	//private TextView mPeriodShow;
+	private TextView mPeriodShow;
 	private DatabaseHandler mDbHandler;
 	private EditText mYearEditText;
 	private EditText mDayEditText;
@@ -48,11 +46,11 @@ public class CalculatorFragment extends Fragment implements DatePickerFragment.p
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
 		super.onCreateView(inflater, container, savedInstanceState);
 		View layout =  inflater.inflate(R.layout.calculator_test_layout, container, false);
-		bChangeDate = (Button) layout.findViewById(R.id.button1);
-		bTrainDate = (Button) layout.findViewById(R.id.button2);
+		bChangeDate = (ImageButton) layout.findViewById(R.id.editButton1);
+		bTrainDate = (ImageButton) layout.findViewById(R.id.editButton2);
 		mDateShow = (TextView) layout.findViewById(R.id.textView1);
 		mTrainDateShow = (TextView) layout.findViewById(R.id.textView2);
-		//mPeriodShow = (TextView) layout.findViewById(R.id.textView3);
+		mPeriodShow = (TextView) layout.findViewById(R.id.periodTextView);
 		//mArrowsView = (ImageView) layout.findViewById(R.id.arrows_image);
 		mDbHandler = new DatabaseHandler(mParent);
 		setCurrentDate();
@@ -117,15 +115,23 @@ public class CalculatorFragment extends Fragment implements DatePickerFragment.p
 				mWeekEditText = (EditText) v.findViewById(R.id.editText1);   
 				mDayEditText = (EditText) v.findViewById(R.id.editTextDays); 
 				mYearEditText = (EditText) v.findViewById(R.id.yearEditText);
-				int weekNo = Integer.parseInt(mWeekEditText.getText().toString());
-				int dayNo = Integer.parseInt(mDayEditText.getText().toString());
-				int year = Integer.parseInt(mYearEditText.getText().toString());
-				if(weekNo > 52 || dayNo > 7){
-					Toast.makeText(mParent.getApplicationContext(), "Unsupported date", Toast.LENGTH_SHORT).show();
-					return;
+				String weekNoText = mWeekEditText.getText().toString();
+				String dayNoText  = mDayEditText.getText().toString();
+				String yearNoText = mYearEditText.getText().toString();
+				if(!weekNoText.equals("") && !dayNoText.equals("") &&! yearNoText.equals("")){
+					int weekNo = Integer.parseInt(weekNoText);
+					int dayNo = Integer.parseInt(dayNoText);
+					int year = Integer.parseInt(yearNoText);
+					if(weekNo > 52 || dayNo > 7){
+						Toast.makeText(mParent.getApplicationContext(), "Unsupported date", Toast.LENGTH_SHORT).show();
+						return;
+					}
+					calculateRealTime(year, weekNo, dayNo);
+					mTrainDateShow.setText(new StringBuilder().append("Week: " ).append(weekNo).append("  Day: ").append(dayNo).append("  Period:").toString());
+					mPeriodShow.setText("Period: " + calculatePeriodAndWeek(weekNo));
+				} else {
+					Toast.makeText(mParent, "Please make sure you have filled in all the boxes", Toast.LENGTH_LONG).show();
 				}
-				calculateRealTime(year, weekNo, dayNo);
-				mTrainDateShow.setText(new StringBuilder().append("Week: " ).append(weekNo).append("  Day: ").append(dayNo).append("  Period:").append(calculatePeriodAndWeek(weekNo)).toString());
 			}
 			
 		}).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -283,12 +289,13 @@ public class CalculatorFragment extends Fragment implements DatePickerFragment.p
 		
 		String period = calculatePeriodAndWeek(weekOfYear);
 		StringBuilder builder = new StringBuilder();
-		builder.append("Week: ").append(weekOfYear).append("  Day: ").append(trainDayOfWeek).append("  Period: ").append(period);
+		builder.append("Week: ").append(weekOfYear).append("  Day: ").append(trainDayOfWeek);
 		String trainTime = builder.toString();
 		
 		//mArrowsView.setImageResource(R.drawable.arrows_down);
 		
 		mTrainDateShow.setText(trainTime);
+		mPeriodShow.setText("Period: "+period);
 		
 	}
 	
@@ -317,7 +324,6 @@ public class CalculatorFragment extends Fragment implements DatePickerFragment.p
 			result = weekNo % baseMod;
 		}
 		//mPeriodShow.setText("Period: " + String.valueOf(periodNum) + "/" + String.valueOf(result));
-		Toast.makeText(mParent, new StringBuilder().append(periodNum).append("/").append(result).toString(), Toast.LENGTH_SHORT).show();
 		Log.v("PeriodAndDay Result", String.valueOf(periodNum) + "/" + String.valueOf(result));
 		return String.valueOf(periodNum) + "/" + String.valueOf(result);
 	}
