@@ -9,17 +9,8 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
 	    tools:context=".MainActivity"
-	    android:id="@+id/fragment_parent" >
-	
-	</FrameLayout >
-	
-	<!--fragment
-	    android:id="@+id/test_fragment"
-	    android:name="com.powerblock.traincalendaralpha.CalculatorFragment"
-	    android:layout_width="0dip"
-	    android:layout_height="match_parent"
-	    tools:layout="@layout/calculator_layout" / -->
-	
+	    android:id="@+id/fragment_parent" />
+
 	<ListView
 	    android:id="@+id/left_drawer"
 	    android:layout_width="240dp"
