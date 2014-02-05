@@ -122,7 +122,7 @@ public class CalculatorFragment extends Fragment implements DatePickerFragment.p
 						return;
 					}
 					calculateRealTime(year, weekNo, dayNo);
-					mTrainDateShow.setText(new StringBuilder().append("Week: " ).append(weekNo).append("  Day: ").append(dayNo).append("  Period:").toString());
+					mTrainDateShow.setText(new StringBuilder().append("Week: " ).append(weekNo).append("  Day: ").append(dayNo).toString());
 					mPeriodShow.setText("Period: " + calculatePeriodAndWeek(weekNo));
 				} else {
 					Toast.makeText(mParent, "Please make sure you have filled in all the boxes", Toast.LENGTH_LONG).show();
